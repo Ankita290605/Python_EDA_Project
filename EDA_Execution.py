@@ -76,3 +76,18 @@ plt.ylabel("Average Marks", fontsize=12)
 plt.xticks(rotation=45, ha='right')
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.show()
+
+
+#Objective 4: Determine if there is a relation between the number of
+#students appearing in an exam center and its average marks. 
+
+# Scatter plot
+plt.figure(figsize=(8, 6))
+sns.scatterplot(data=df, x='total_students', y='center_average_marks', color='green', alpha=0.7)
+
+plt.title('Total Students vs. Average Marks', fontsize=14)
+plt.xlabel('Total Students at Center')
+plt.ylabel('Center Average Marks')
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.tight_layout()
+plt.show()
