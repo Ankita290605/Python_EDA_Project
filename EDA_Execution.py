@@ -91,3 +91,36 @@ plt.ylabel('Center Average Marks')
 plt.grid(True, linestyle='--', alpha=0.6)
 plt.tight_layout()
 plt.show()
+
+
+#Objective 5: To analyze the performance of students across different
+#state by comparing the average marks of each state with the national
+#average marks in the NEET exam. The goal is to identify states that are
+#excelling or underperforming relative to the national average.
+
+national_avg = df['national_average_marks'].iloc[0]
+
+# Grouping state and calculating mean of state average marks
+state_avg = df.groupby('state')['state_average_marks'].mean()
+
+# Converting state average marks and national average into a DataFrame
+comparison_df = pd.DataFrame({
+    'State_Avg_Marks': state_avg,
+    'National_Avg_Marks': national_avg})
+
+# Calculating the difference between state average and national average
+comparison_df['Difference'] = comparison_df['State_Avg_Marks'] - comparison_df['National_Avg_Marks']
+
+# Round the values for cleaner display
+comparison_df = comparison_df.round(2)
+
+# Ploting heatmap
+plt.figure(figsize=(12, 6))
+sns.heatmap(comparison_df[['Difference']], annot=True, cmap='coolwarm', center=0, linewidths=0.5, fmt=".2f")
+
+plt.title('Comparison of State Average Marks vs National Average Marks')
+plt.xlabel('Difference from National Average')
+plt.ylabel('State')
+plt.tight_layout()
+plt.show()
+
