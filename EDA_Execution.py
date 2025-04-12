@@ -58,3 +58,21 @@ plt.xlabel("Number of Students")
 plt.ylabel("Number of States")
 plt.legend()
 plt.show()
+
+
+#objective 3: Identify the top 10 exam centers based on average marks.
+#Visualize the distribution of scores for these centers.
+
+# Sorting top 10 by average marks
+top_centers = df.sort_values(by='center_average_marks', ascending=False).head(10)
+
+# Line plot
+plt.figure(figsize=(8, 6))
+plt.plot(top_centers['center_name'], top_centers['center_average_marks'], marker='o', linestyle='-', color='teal')
+
+plt.title("Top 10 NEET Exam Centers by Average Marks", fontsize=14)
+plt.xlabel("Exam Center", fontsize=12)
+plt.ylabel("Average Marks", fontsize=12)
+plt.xticks(rotation=45, ha='right')
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.show()
