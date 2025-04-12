@@ -25,20 +25,36 @@ print("\nIf null values, then fill with NaN: \n", df.dropna())
 # One row per state (state-level values are repeated)
 states = df.drop_duplicates(subset="state")
 
-# Create hue column 
+# Creating hue column 
 states["Performance"] = states["state_average_marks"] > states["national_average_marks"]
 
 # Sort states by average marks
 states = states.sort_values("state_average_marks", ascending=False)
 
-# Plot using seaborn
+# Ploting bar graph
 plt.figure(figsize=(8, 6))
 sns.barplot(data=states, x="state", y="state_average_marks", hue="Performance", palette="viridis")
-sns.despine()
 plt.title("State Average NEET Marks vs National Average", fontsize=14)
 plt.xlabel("State")
 plt.ylabel("Average Marks")
 plt.xticks(rotation=90)
 plt.legend(title="Above National Avg", loc="upper right")
 plt.tight_layout()
+plt.show()
+
+
+#Objective 2: Visualize the distribution of states based on the number
+#of students scoring above 600 and 700 using histograms, to understand
+#how high scorers are spread across states.
+
+df = df.drop_duplicates(subset="state")
+
+# Ploting both histograms
+plt.figure(figsize=(8, 6))
+sns.histplot(df["above_600_marks"], color="pink", label="Above 600", bins=15, kde=False)
+sns.histplot(df["above_700_marks"], color="blue", label="Above 700", bins=15, kde=False)
+plt.title("Distribution of States by Number of High Scorers")
+plt.xlabel("Number of Students")
+plt.ylabel("Number of States")
+plt.legend()
 plt.show()
